@@ -1,0 +1,11 @@
+[Unit]
+Description=Logging to systemd in various ways to verify no bugs exist.
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/home/cameronbaird/journald-stresstest/run.sh
+Restart=on-abort
+
+[Install]
+WantedBy=multi-user.target
