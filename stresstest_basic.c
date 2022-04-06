@@ -5,6 +5,7 @@
 #include <stdbool.h>
 #include <signal.h>
 #include <pthread.h>
+#include <sys/wait.h>
 
 #define MESSAGE_SIZE 75
 
@@ -57,7 +58,7 @@ int main(int argc, char *argv[]) {
         if (pid == 0) {
             // child
             entry0();
-            return 0;
+            exit(0);
         } else {
 	    // main process
 	    // attempt to interrupt the child process to invalidate the pid
@@ -87,6 +88,7 @@ int main(int argc, char *argv[]) {
 	    free(objpid_str);
 	    pthread_join(thread_id, NULL);
 	}
+	wait(NULL);
         //sleep(5);
     }
     return 0;
